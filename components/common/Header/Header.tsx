@@ -1,12 +1,18 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./ShoppingCartIcon";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import MobileMenu from "./MobileMenu";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="bg-white fixed top-0 left-0 z-50 py-4 w-full border-b ">
-      <div className="container mx-auto flex items-center justify-between px-4 md:px-8 lg:px-12 ">
+    <header className="bg-white fixed top-0 left-0 z-50 py-4 w-full ">
+      <div className="container mx-auto flex items-center justify-between px-4 ">
         {/* logo */}
         <Link href={"/"} className="flex items-center ">
           <Image src={"/logo.png"} alt="Pizzaro" width={40} height={40} />
@@ -15,7 +21,8 @@ const Header = () => {
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        {/* right side desktop */}
+        <div className=" items-center gap-4 hidden lg:flex">
           {/* searchbar */}
           <SearchBar />
           {/* cart */}
@@ -41,7 +48,23 @@ const Header = () => {
             Order Now!
           </Link>
         </div>
+
+        {/* right side mobile */}
+        <button
+          className="lg:hidden p-2 rounded-md border border-gray-200"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? (
+            <X size={24} className="text-pizza-orange" />
+          ) : (
+            <Menu size={24} />
+          )}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && <MobileMenu />}
     </header>
   );
 };
