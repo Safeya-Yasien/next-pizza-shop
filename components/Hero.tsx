@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 const Hero = () => {
   return (
     <div className="bg-[#FDE5E2]">
-      <div className="container mx-auto px-12 py-20 ">
+      <div className="container mx-auto px-4 lg:px-12 py-20 ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* left */}
           <div className="space-y-8">
@@ -102,7 +102,7 @@ const Hero = () => {
               </div>
 
               {/* Live orders (bottom-right)  */}
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 font-semibold">
+              <div className="absolute -bottom-4 -right-2 lg:-right-6 bg-white rounded-xl shadow-md px-4 py-2 flex items-center gap-2 font-semibold">
                 <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
                 <span className="text-sm font-semibold text-gray-800">
                   4.9/5 Rating
