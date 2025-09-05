@@ -15,7 +15,13 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between px-4 ">
         {/* logo */}
         <Link href={"/"} className="flex items-center ">
-          <Image src={"/logo.png"} alt="Pizzaro" width={40} height={40} />
+          <Image
+            src={"/logo.png"}
+            alt="Pizzaro"
+            width={40}
+            height={40}
+            priority
+          />
           <span className="bg-pizza-gradient bg-clip-text text-transparent text-4xl font-bold">
             Pizzaro
           </span>
@@ -31,7 +37,7 @@ const Header = () => {
           <Link
             href="/login"
             className="h-12 px-6 rounded-2xl text-center flex items-center justify-center text-sm font-medium
-             bg-white border border-gray-300 text-gray-700
+             bg-white border-2 border-pizza-orange-200 text-gray-700 
              hover:border-pizza-orange hover:text-pizza-orange 
              shadow-sm hover:shadow-md transition-all duration-300"
           >

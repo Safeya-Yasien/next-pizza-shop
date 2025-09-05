@@ -119,6 +119,8 @@
   --color-pizza-orange-hover: #ea580c; /* orange-600 */
   --color-pizza-yellow-hover: #ca8a04; /* yellow-600 */
 
+  --color-pizza-orange-200: oklch(90.1% 0.076 70.697);
+
   --background-image-pizza-gradient: linear-gradient(
     to right,
     var(--color-pizza-red),
