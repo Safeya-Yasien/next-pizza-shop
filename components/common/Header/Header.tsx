@@ -11,8 +11,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="bg-white fixed top-0 left-0 z-50 py-4 w-full ">
-      <div className="container mx-auto flex items-center justify-between px-4 ">
+    <header className="bg-white/80 fixed top-0 left-0 z-50 py-4 w-full backdrop-blur-xl ">
+      <div className="container mx-auto flex items-center justify-between px-4 lg:px-12 ">
         {/* logo */}
         <Link href={"/"} className="flex items-center ">
           <Image
