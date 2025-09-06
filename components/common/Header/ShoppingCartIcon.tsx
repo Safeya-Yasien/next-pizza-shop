@@ -2,7 +2,7 @@ import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 const ShoppingCartIcon = () => {
-  console.log("ShoppingCart render");
+  // console.log("ShoppingCart render");
 
   return (
     <Link

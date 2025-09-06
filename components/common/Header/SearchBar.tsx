@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
 const SearchBar = () => {
-  console.log("SearchBar render");
+  // console.log("SearchBar render");
 
   return (
     <form className="relative ">
