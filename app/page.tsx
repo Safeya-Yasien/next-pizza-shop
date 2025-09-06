@@ -1,9 +1,16 @@
 import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Testimonials from "@/components/Testimonials";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className="">
+    <div>
       <Hero />
+      <WhyChooseUs />
+      <Testimonials/>
+      <Stats/>
     </div>
   );
-}
+};
+export default HomePage;
