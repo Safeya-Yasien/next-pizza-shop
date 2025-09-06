@@ -65,7 +65,7 @@ const FeatureCard = memo(
 FeatureCard.displayName = "FeatureCard";
 
 const WhyChooseUs = () => (
-  <section className="py-20 bg-gray-50">
+  <section className="py-20 bg-white">
     <div className="container mx-auto px-6 lg:px-12">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
