@@ -48,7 +48,7 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="h-12 px-4 rounded-full bg-white/90 border border-orange-200 text-gray-800 placeholder:text-gray-500 focus:ring-2 focus:ring-orange-400/50 shadow-sm"
               />
-              <Button className="h-12 px-6 rounded-full bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 hover:scale-105 hover:shadow-md transition-all duration-200 text-white font-semibold">
+              <Button className="cursor-pointer h-12 px-6 rounded-full bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 hover:shadow-md transition-all duration-300 text-white font-semibold">
                 Subscribe
                 <Send className="ml-2 h-4 w-4" />
               </Button>
