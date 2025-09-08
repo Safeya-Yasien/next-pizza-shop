@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./ShoppingCartIcon";
