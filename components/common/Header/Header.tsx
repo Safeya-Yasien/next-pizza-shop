@@ -15,13 +15,7 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between px-4 lg:px-12 ">
         {/* logo */}
         <Link href={"/"} className="flex items-center ">
-          <Image
-            src={"/logo.png"}
-            alt="Pizzaro"
-            width={40}
-            height={40}
-            priority
-          />
+          <span className="text-3xl"> 🍕</span>
           <span className="bg-pizza-gradient bg-clip-text text-transparent text-4xl font-bold">
             Pizzaro
           </span>
