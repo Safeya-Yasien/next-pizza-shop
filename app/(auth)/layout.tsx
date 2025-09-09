@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Toaster } from "@/components/ui/sonner";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,6 +17,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           </Link>
 
           {children}
+          <Toaster />
         </div>
       </div>
     </>
