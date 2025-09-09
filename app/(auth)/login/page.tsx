@@ -1,3 +1,4 @@
+import LoginForm from "@/components/auth/LoginForm";
 import Link from "next/link";
 
 const LoginPage = () => {
@@ -31,44 +32,7 @@ const LoginPage = () => {
       </div>
 
       {/* Form */}
-      <form className="space-y-4">
-        <div>
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            placeholder="you@example.com"
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition shadow-sm hover:shadow-md"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder="••••••••"
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition shadow-sm hover:shadow-md"
-          />
-        </div>
-        <button
-          type="submit"
-          className="cursor-pointer w-full py-3 rounded-xl font-semibold bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white hover:from-red-600 hover:via-orange-600 hover:to-yellow-600 transition"
-        >
-          {" "}
-          Welcome Back! 🎉{" "}
-        </button>
-      </form>
+      <LoginForm />
 
       {/* Footer */}
       <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">

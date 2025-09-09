@@ -4,9 +4,10 @@ import { useForm } from "react-hook-form";
 import { signupSchema, SignupSchema } from "@/schemas/signup.schema";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signup } from "@/lib/signup";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import FormInput from "./FormInput";
+import { handleSignupSubmit } from "@/actions/auth/signup";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -23,73 +24,57 @@ const SignupForm = () => {
 
   const onSubmit = async (values: SignupSchema) => {
     setServerError(null);
-    const res = await signup(values);
+    const res = await handleSignupSubmit(values);
 
-    if (res.success) {
+    if ("identifier" in res) {
       reset();
       toast.success("Account created successfully! 🎉");
       router.push("/login");
     } else {
-      setServerError(res.error);
-      toast.error(res.error || "Signup failed. Try again.");
+      const errorMessage =
+        "message" in res ? res.message : "Signup failed. Try again.";
+      setServerError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {/* Name */}
-      <div>
-        <label className="block text-sm font-medium mb-1">Full Name</label>
-        <input
-          type="text"
-          {...register("name")}
-          placeholder="John Doe"
-          className="w-full px-4 py-3 rounded-xl border"
-        />
-        {errors.name && <p className="text-red-600">{errors.name.message}</p>}
-      </div>
+      <FormInput
+        label="Full Name"
+        type="text"
+        placeholder="John Doe"
+        {...register("name")}
+        error={errors.name}
+      />
 
       {/* Email */}
-      <div>
-        <label className="block text-sm font-medium mb-1">Email</label>
-        <input
-          type="email"
-          {...register("email")}
-          placeholder="you@example.com"
-          className="w-full px-4 py-3 rounded-xl border"
-        />
-        {errors.email && <p className="text-red-600">{errors.email.message}</p>}
-      </div>
+      <FormInput
+        label="Email"
+        type="email"
+        placeholder="you@example.com"
+        {...register("email")}
+        error={errors.email}
+      />
 
       {/* Password */}
-      <div>
-        <label className="block text-sm font-medium mb-1">Password</label>
-        <input
-          type="password"
-          {...register("password")}
-          placeholder="••••••••"
-          className="w-full px-4 py-3 rounded-xl border"
-        />
-        {errors.password && (
-          <p className="text-red-600">{errors.password.message}</p>
-        )}
-      </div>
+      <FormInput
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+        {...register("password")}
+        error={errors.password}
+      />
 
       {/* Confirm Password */}
-      <div>
-        <label className="block text-sm font-medium mb-1">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          {...register("confirmPassword")}
-          placeholder="••••••••"
-          className="w-full px-4 py-3 rounded-xl border"
-        />
-        {errors.confirmPassword && (
-          <p className="text-red-600">{errors.confirmPassword.message}</p>
-        )}
-      </div>
+      <FormInput
+        label="Confirm Password"
+        type="password"
+        placeholder="••••••••"
+        {...register("confirmPassword")}
+        error={errors.confirmPassword}
+      />
 
       {/* Server error */}
       {serverError && <p className="text-red-600 text-center">{serverError}</p>}
