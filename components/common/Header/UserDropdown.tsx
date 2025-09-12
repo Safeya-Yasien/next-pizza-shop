@@ -10,9 +10,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLogout } from "@/hooks/useLogout";
-import { IAuthProps } from "@/types/user.type";
+import { IUserRequiredProps } from "@/types/user.type";
 
-const UserDropdown = ({ user, setUser }: IAuthProps) => {
+const UserDropdown = ({ user, setUser }: IUserRequiredProps) => {
   const handleLogout = useLogout({ setUser });
 
   return (

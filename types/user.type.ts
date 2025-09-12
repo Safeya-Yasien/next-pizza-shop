@@ -4,3 +4,8 @@ export interface IAuthProps {
   user: IUserEntity | null;
   setUser: (user: IUserEntity | null) => void;
 }
+
+export interface IUserRequiredProps {
+  user: IUserEntity;
+  setUser: (user: IUserEntity | null) => void;
+}

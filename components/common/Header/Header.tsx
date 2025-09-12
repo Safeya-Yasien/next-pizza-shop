@@ -4,35 +4,17 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import { Menu, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MobileMenu from "./MobileMenu";
-import getUserSession from "@/actions/auth/getUserSession";
-import { IUserEntity } from "oneentry/dist/users/usersInterfaces";
 
 import UserDropdown from "./UserDropdown";
 import AuthButtons from "./AuthButtons";
+import { useUser } from "@/hooks/useUser";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState<IUserEntity | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        setLoading(true);
-        const userData = await getUserSession();
-        if (userData) setUser(userData as IUserEntity);
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        setUser(null);
-        setLoading(false);
-      }
-    }
-
-    fetchUser();
-  }, []);
+  const { user, setUser, loading } = useUser();
 
   return (
     <header className="bg-white/80 fixed top-0 left-0 z-50 py-4 w-full backdrop-blur-xl ">
