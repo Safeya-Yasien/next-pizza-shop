@@ -5,16 +5,10 @@
 
 <!-- what next -->
 
-- add spicy pizza section to home page
-- add CLASSIC PIZZAS section to home page
-- add CHEESE LOVERS section to home page
 - add index.ts in components folder
+- add products page it's search page it's exist
 
 <!-- logic -->
-
-- authentication
-
-  - logout
 
 - order
 - cart
@@ -24,8 +18,7 @@
 
 <!-- Now -->
 
-- authentication using oneEntry
-  - login
-  - signup
-
-
+- order now button or link in hero section add condition if user logged in gso to products in home page if not go to login page
+- products page
+- products sections in home page (avalible, description)
+- cart

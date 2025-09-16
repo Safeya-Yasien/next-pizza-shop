@@ -42,7 +42,7 @@ const Hero = () => {
             {/* buttons */}
             <div className="flex items-center gap-4">
               <Link
-                href={"/"}
+                href={"/products"}
                 className="h-12 px-6 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl text-white font-semibold shadow-lg hover:scale-105 transition-all duration-300 ease-in-out inline-flex items-center justify-center"
               >
                 Order Now - Free Delivery!
