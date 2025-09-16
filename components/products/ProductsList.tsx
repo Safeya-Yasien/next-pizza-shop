@@ -1,18 +1,34 @@
+import { IProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProductsList = ({ id, name, description, price, available, image }) => {
+const ProductsList = ({ product }: { product: IProduct }) => {
+  const {
+    id,
+    attributeValues: { p_description, p_price, p_image, p_title, p_available },
+  } = product;
+
+  const title =
+    (typeof p_title.value === "string" && p_title.value) || "Untitled Pizza";
+  const description = Array.isArray(p_description?.value)
+    ? p_description.value[0]?.htmlValue || "No description available"
+    : p_description?.value || "No description available";
+
+  const price = `$${p_price?.value || 0}`;
+  const image = p_image?.value?.downloadLink || "/images/default-pizza.jpg";
+  const available =
+    typeof p_available === "string" &&
+    p_available.toLowerCase() === "available";
+
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition-shadow p-0 flex flex-col overflow-hidden">
-      {/* Full width top image */}
-
       <Link
         href={`/pizza/${id}`}
         className="relative w-full h-56 overflow-hidden group"
       >
         <Image
           src={image}
-          alt={name}
+          alt={title}
           fill
           className="object-cover transform transition-transform duration-400 group-hover:scale-110"
         />
@@ -25,7 +41,7 @@ const ProductsList = ({ id, name, description, price, available, image }) => {
 
       <div className="p-6 flex flex-col flex-1">
         <h3 className="text-xl font-bold mb-1 text-gray-900 dark:text-gray-100">
-          {name}
+          {title}
         </h3>
         <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 flex-1">
           {description}

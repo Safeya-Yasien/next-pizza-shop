@@ -1,13 +1,21 @@
+"use client";
+
 import Hero from "@/components/Hero";
-import Products from "@/components/Products";
+import { ProductCatalog } from "@/components/products";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import VisitKitchen from "@/components/VisitKitchen";
 import WhyChooseUs from "@/components/WhyChooseUs";
-
-// import { Hero, Stats, Testimonials, WhyChooseUs } from "@/components";
+import { useCatalogs } from "@/hooks/useCatalogs";
+import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 
 const HomePage = () => {
+  const { catalogs, isLoading } = useCatalogs();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Hero />
@@ -15,7 +23,15 @@ const HomePage = () => {
       <Testimonials />
       <Stats />
       <VisitKitchen />
-      <Products/>
+      {catalogs.map((catalog) => (
+        <ProductCatalog
+          key={catalog.id}
+          title={catalog.localizeInfos?.title as string}
+          products={
+            catalog.catalogProducts.items as unknown as IProductsEntity[]
+          }
+        />
+      ))}
     </div>
   );
 };
