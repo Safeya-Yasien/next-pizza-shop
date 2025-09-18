@@ -1,20 +1,14 @@
-"use client";
-
 import Hero from "@/components/Hero";
 import { ProductCatalog } from "@/components/products";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import VisitKitchen from "@/components/VisitKitchen";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { useCatalogs } from "@/hooks/useCatalogs";
+import { fetchCatalogs } from "@/lib/catalogs";
 import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 
-const HomePage = () => {
-  const { catalogs, isLoading } = useCatalogs();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+const HomePage = async () => {
+  const catalogs = await fetchCatalogs();
 
   return (
     <div>

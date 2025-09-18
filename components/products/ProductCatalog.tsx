@@ -10,8 +10,6 @@ type TProductCatalogProps = {
 };
 
 const ProductCatalog = ({ title, products }: TProductCatalogProps) => {
-  // console.log("products in ProductCatalog:", products);
-
   const transformedProducts: IProduct[] = products.map(transformedProduct);
 
   return (
