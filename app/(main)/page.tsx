@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import { ProductCatalog } from "@/components/products";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
+import TrustBadges from "@/components/TrustBadges";
 import VisitKitchen from "@/components/VisitKitchen";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { fetchCatalogs } from "@/lib/catalogs";
@@ -14,9 +15,7 @@ const HomePage = async () => {
     <div>
       <Hero />
       <WhyChooseUs />
-      <Testimonials />
-      <Stats />
-      <VisitKitchen />
+      <TrustBadges />
       {catalogs.map((catalog) => (
         <ProductCatalog
           key={catalog.id}
@@ -26,6 +25,9 @@ const HomePage = async () => {
           }
         />
       ))}
+      <VisitKitchen />
+      <Stats />
+      <Testimonials />
     </div>
   );
 };

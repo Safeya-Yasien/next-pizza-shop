@@ -22,3 +22,4 @@
 - products page
 - products sections in home page (avalible, description)
 - cart
+- add about us page remmove the part in footer and move it to about us page
