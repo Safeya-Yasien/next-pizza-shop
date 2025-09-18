@@ -1,8 +1,8 @@
-import { IProduct } from "@/types";
+import { transformedProduct } from "@/utils/transformProduct";
 import CategoryTitle from "./CategoryTitle";
 import ProductsList from "./ProductsList";
 import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
-import { transformProduct } from "@/utils/transformProduct";
+import { IProduct } from "@/types";
 
 type TProductCatalogProps = {
   title: string;
@@ -10,9 +10,10 @@ type TProductCatalogProps = {
 };
 
 const ProductCatalog = ({ title, products }: TProductCatalogProps) => {
-  console.log("products in ProductCatalog:", products);
+  // console.log("products in ProductCatalog:", products);
 
-  const transformedProducts: IProduct[] = products.map(transformProduct);
+  const transformedProducts: IProduct[] = products.map(transformedProduct);
+
   return (
     <section className="py-16 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-6 lg:px-12">
