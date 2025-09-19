@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-white text-gray-800">
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-8 md:py-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 px-4 lg:px-12 py-8 md:py-12">
         {/* Brand */}
         <div className="space-y-6 text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-3">
@@ -37,7 +37,7 @@ export default function Footer() {
             ingredients.
           </p>
           {/* Social Media */}
-          <div>
+          <div className="">
             <h4 className="font-semibold text-lg text-gray-900 mb-3">
               Follow Us
             </h4>
@@ -151,7 +151,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-2 mt-2 md:mt-0">
             <Heart className="h-4 w-4 text-red-500" />
-            <span>Made with love in New York</span>
+            <span>Made with love by Safeya Yasien</span>
           </div>
         </div>
       </div>

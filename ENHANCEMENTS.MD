@@ -20,6 +20,4 @@
 
 - order now button or link in hero section add condition if user logged in gso to products in home page if not go to login page
 - products page
-- products sections in home page (avalible, description)
 - cart
-- add about us page remmove the part in footer and move it to about us page

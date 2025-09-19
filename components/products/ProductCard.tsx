@@ -2,7 +2,7 @@ import { IProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProductsList = ({ product }: { product: IProduct }) => {
+const ProductCard = ({ product }: { product: IProduct }) => {
   const {
     id,
     attributeValues: { p_description, p_price, p_image, p_title, p_available },
@@ -15,11 +15,14 @@ const ProductsList = ({ product }: { product: IProduct }) => {
     p_description?.value?.[0]?.htmlValue ||
     "No description available";
   const price = p_price?.value || 0;
+  const availableValue = Array.isArray(p_available?.value)
+    ? p_available.value[0]?.value
+    : p_available;
 
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition-shadow p-0 flex flex-col overflow-hidden">
       <Link
-        href={`/pizza/${id}`}
+        href={`/product/${id}`}
         className="relative w-full h-56 overflow-hidden group"
       >
         <Image
@@ -44,8 +47,10 @@ const ProductsList = ({ product }: { product: IProduct }) => {
         </p>
 
         <div className="flex items-center justify-between mb-4">
-          <p className="text-orange-500 font-bold text-lg">${price}</p>
-          {p_available === "Available" && (
+          <p className="text-orange-500 font-bold text-lg">
+            ${price.toFixed(2)}
+          </p>
+          {availableValue === "Available" && (
             <span className="flex items-center gap-1 text-green-700 font-semibold text-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-green-700 inline-block" />
               Available
@@ -53,7 +58,7 @@ const ProductsList = ({ product }: { product: IProduct }) => {
           )}
         </div>
 
-        {p_available === "Available" ? (
+        {availableValue === "Available" ? (
           <button className="cursor-pointer bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white py-2 px-4 rounded-xl font-semibold hover:from-red-600 hover:via-orange-600 hover:to-yellow-600 transition-all duration-200">
             Add to Cart 🍕
           </button>
@@ -66,4 +71,4 @@ const ProductsList = ({ product }: { product: IProduct }) => {
     </div>
   );
 };
-export default ProductsList;
+export default ProductCard;

@@ -1,8 +1,8 @@
 import { transformedProduct } from "@/utils/transformProduct";
 import CategoryTitle from "./CategoryTitle";
-import ProductsList from "./ProductsList";
 import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 import { IProduct } from "@/types";
+import ProductCard from "./ProductCard";
 
 type TProductCatalogProps = {
   title: string;
@@ -19,7 +19,7 @@ const ProductCatalog = ({ title, products }: TProductCatalogProps) => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {transformedProducts.map((product) => (
-            <ProductsList key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>

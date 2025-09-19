@@ -1,4 +1,4 @@
 import ProductCatalog from "./ProductCatalog";
-import ProductsList from "./ProductsList";
+import ProductsList from "./ProductCard";
 
 export { ProductCatalog, ProductsList };
