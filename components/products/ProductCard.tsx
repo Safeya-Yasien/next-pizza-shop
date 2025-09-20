@@ -1,6 +1,10 @@
+"use client";
+
+import { useCartStore } from "@/store/cartStore";
 import { IProduct } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const {
@@ -18,6 +22,23 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const availableValue = Array.isArray(p_available?.value)
     ? p_available.value[0]?.value
     : p_available;
+
+  const { addToCart } = useCartStore();
+
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      name: title,
+      price,
+      quantity: 1,
+      image,
+    });
+
+    toast.success("Added to cart! 🎉", {
+      description: `${title} has been added to your cart.`,
+      duration: 3000,
+    });
+  };
 
   return (
     <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md hover:shadow-xl transition-shadow p-0 flex flex-col overflow-hidden">
@@ -59,7 +80,10 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         </div>
 
         {availableValue === "Available" ? (
-          <button className="cursor-pointer bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white py-2 px-4 rounded-xl font-semibold hover:from-red-600 hover:via-orange-600 hover:to-yellow-600 transition-all duration-200">
+          <button
+            onClick={handleAddToCart}
+            className="cursor-pointer bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 text-white py-2 px-4 rounded-xl font-semibold hover:from-red-600 hover:via-orange-600 hover:to-yellow-600 transition-all duration-200"
+          >
             Add to Cart 🍕
           </button>
         ) : (
