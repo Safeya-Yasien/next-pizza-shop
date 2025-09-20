@@ -8,8 +8,11 @@ interface ICartStoreProps {
   setHasHydrated: (value: boolean) => void;
   addToCart: (item: ICartItem) => void;
   removeFromCart: (itemId: number) => void;
+  updateQuantity: (itemId: number, quantity: number) => void;
   getCartItemsCount: () => number;
   clearCart: () => void;
+
+  getSubTotal: () => number;
 }
 
 export const useCartStore = create<ICartStoreProps>()(
@@ -45,11 +48,42 @@ export const useCartStore = create<ICartStoreProps>()(
           }
         },
 
-        removeFromCart: (itemId: number) => {},
+        removeFromCart: (itemId: number) => {
+          set(
+            (state) => ({
+              cartItems: state.cartItems.filter((i) => i.id !== itemId),
+            }),
+            false,
+            "cart/removeFromCart"
+          );
+        },
+
         getCartItemsCount: () => {
           return get().cartItems.length;
         },
-        clearCart: () => {},
+
+        updateQuantity: (itemId: number, quantity: number) => {
+          set(
+            (state) => ({
+              cartItems: state.cartItems.map((i) =>
+                i.id === itemId ? { ...i, quantity: Math.max(1, quantity) } : i
+              ),
+            }),
+            false,
+            "cart/updateQuantity"
+          );
+        },
+
+        clearCart: () => {
+          set({ cartItems: [] }, false, "cart/clearCart");
+        },
+
+        getSubTotal: () => {
+          return get().cartItems.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+          );
+        },
       }),
 
       // persist options
