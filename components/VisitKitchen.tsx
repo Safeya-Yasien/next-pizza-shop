@@ -64,7 +64,7 @@ export default function VisitKitchen() {
           <div className="relative ">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
               <Image
-                src="/images/visitKitchen.webp"
+                src="/visitKitchen.webp"
                 alt="SahandPizza Kitchen"
                 width={600}
                 height={400}

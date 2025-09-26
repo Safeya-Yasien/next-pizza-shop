@@ -11,7 +11,6 @@
 <!-- logic -->
 
 - order
-- cart
 - checkout
 - search
   - filter page
@@ -20,5 +19,9 @@
 
 - order now button or link in hero section add condition if user logged in gso to products in home page if not go to login page
 - products page
-- cart
+
 - loading
+
+- checkout in cart page
+- success page
+- failed page
