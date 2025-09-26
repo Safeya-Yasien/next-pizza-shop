@@ -6,7 +6,13 @@ import { getRelatedProducts } from "@/actions/catalog/getRelatedProducts";
 import ProductCard from "@/components/products/ProductCard";
 import Link from "next/link";
 
-const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
+interface ProductPageProps {
+  params: {
+    id: string;
+  };
+}
+
+const ProductDetailsPage = async ({ params }: ProductPageProps) => {
   const productId = parseInt(params.id);
   const product = await getProductDetails(productId);
 
