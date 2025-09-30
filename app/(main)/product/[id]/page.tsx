@@ -14,13 +14,6 @@ const ProductDetailsPage = async ({
   const { id } = await params;
   const productId = parseInt(id);
 
-  // export default async function ProductDetailsPage({
-  //   params,
-  // }: {
-  //   params: Promise<{ id: string }>;
-  // }) {
-  //   const { id } = await params;
-  //   const productId = parseInt(id);
   const product = await getProductDetails(productId);
 
   const title = product?.localizeInfos?.title as string;
