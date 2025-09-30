@@ -6,8 +6,21 @@ import { getRelatedProducts } from "@/actions/catalog/getRelatedProducts";
 import ProductCard from "@/components/products/ProductCard";
 import Link from "next/link";
 
-const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const productId = parseInt(params.id);
+// export default async function ProductDetailsPage({
+//   params,
+// }: {
+//   params: Promise<{ id: string }>;
+// }) {
+//   const { id } = await params;
+//   const productId = parseInt(id);
+
+export default async function ProductDetailsPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const productId = parseInt(id);
   const product = await getProductDetails(productId);
 
   const title = product?.localizeInfos?.title as string;
@@ -124,6 +137,4 @@ const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
       </section>
     </div>
   );
-};
-
-export default ProductDetailsPage;
+}

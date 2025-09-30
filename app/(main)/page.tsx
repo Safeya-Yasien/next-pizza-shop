@@ -8,7 +8,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import { fetchCatalogs } from "@/lib/catalogs";
 import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 
-
+export const dynamic = "force-dynamic";
 
 const HomePage = async () => {
   const catalogs = await fetchCatalogs();
