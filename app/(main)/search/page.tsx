@@ -1,49 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useSearchParams } from "next/navigation";
-import { searchProductsAction } from "@/actions/catalog/searchProducts";
-import { useRouter } from "next/navigation";
 import { IProduct } from "@/types";
-import { IProductsEntity } from "oneentry/dist/products/productsInterfaces";
 import ProductCard from "@/components/products/ProductCard";
-import { transformedProduct } from "@/utils/transformProduct";
+import {
+  TAvailability,
+  TSort,
+  useProductFilters,
+} from "@/hooks/useProductFilters";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchProducts } from "@/hooks/useSearchProducts";
 
 const SearchPage = () => {
-  const params = useSearchParams();
-  const searchTerm = params.get("search");
   const router = useRouter();
+  const params = useSearchParams();
+  const searchTerm = params.get("search") || "";
+  const [searchQuery, setSearchQuery] = useState(searchTerm);
 
-  const [searchQuery, setSearchQuery] = useState(searchTerm || "");
-  const [products, setProducts] = useState<IProductsEntity[]>([]);
+  // fetch search results
+  const { products, loading } = useSearchProducts(searchQuery);
 
-  useEffect(() => {
-    setSearchQuery(searchTerm || "");
-  }, [searchTerm]);
-
-  useEffect(() => {
-    const getSearchedProducts = async () => {
-      if (searchQuery) {
-        const data = await searchProductsAction({ query: searchQuery });
-        setProducts(data as IProductsEntity[]);
-      }
-    };
-    getSearchedProducts();
-  }, [searchQuery]);
-
-  const transformedProducts: IProduct[] = products.map(transformedProduct);
+  // apply filters
+  const { filters, setFilters, filteredProducts } = useProductFilters(products);
 
   const handleSearch = () => {
-    const searchParams = new URLSearchParams(params?.toString());
-    searchParams.set("search", searchQuery);
-    router.push("/search?" + searchParams.toString());
+    const sp = new URLSearchParams(params.toString());
+    sp.set("search", searchQuery);
+    router.push(`/search?${sp.toString()}`);
   };
 
-  const [availability, setAvailability] = useState("all");
-  const [sort, setSort] = useState("relevance");
+  useEffect(() => {
+    setSearchQuery(searchTerm);
+  }, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 px-6 lg:px-20 pt-28 pb-16">
@@ -93,8 +84,19 @@ const SearchPage = () => {
                 </span>
                 <input
                   type="number"
-                  placeholder="0"
+                  min={0}
+                  max={100}
                   className="w-28 pl-7 pr-4 py-3 rounded-xl bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder:text-gray-400"
+                  value={filters.priceRange[0]}
+                  onChange={(e) =>
+                    setFilters({
+                      ...filters,
+                      priceRange: [
+                        Number(e.target.value),
+                        filters.priceRange[1],
+                      ],
+                    })
+                  }
                 />
               </div>
               <span className="text-gray-500 dark:text-gray-400 font-medium">
@@ -107,7 +109,19 @@ const SearchPage = () => {
                 <input
                   type="number"
                   placeholder="100"
+                  min={0}
+                  max={100}
                   className="w-28 pl-7 pr-4 py-3 rounded-xl bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder:text-gray-400"
+                  value={filters.priceRange[1]}
+                  onChange={(e) =>
+                    setFilters({
+                      ...filters,
+                      priceRange: [
+                        filters.priceRange[0],
+                        Number(e.target.value),
+                      ],
+                    })
+                  }
                 />
               </div>
             </div>
@@ -120,8 +134,13 @@ const SearchPage = () => {
             </label>
             <div className="relative">
               <select
-                value={availability}
-                onChange={(e) => setAvailability(e.target.value)}
+                value={filters.availability}
+                onChange={(e) =>
+                  setFilters({
+                    ...filters,
+                    availability: e.target.value as TAvailability,
+                  })
+                }
                 className="w-56 appearance-none px-5 py-4 text-base font-medium rounded-xl bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all"
               >
                 <option value="all">All Items</option>
@@ -141,8 +160,10 @@ const SearchPage = () => {
             </label>
             <div className="relative">
               <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
+                value={filters.sort}
+                onChange={(e) =>
+                  setFilters({ ...filters, sort: e.target.value as TSort })
+                }
                 className="w-56 appearance-none px-5 py-4 text-base font-medium rounded-xl bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all"
               >
                 <option value="relevance">Relevance</option>
@@ -159,11 +180,15 @@ const SearchPage = () => {
       </div>
 
       {/* Results */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {transformedProducts.map((product: IProduct) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      {loading ? (
+        <p className="text-center text-gray-500">Loading...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProducts.map((product: IProduct) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
