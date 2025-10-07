@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import { Menu, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import MobileMenu from "./MobileMenu";
 
 import UserDropdown from "./UserDropdown";
@@ -30,7 +30,9 @@ const Header = () => {
         {/* right side desktop */}
         <div className=" items-center gap-4 hidden lg:flex">
           {/* searchbar */}
-          <SearchBar />
+          <Suspense fallback={<div>Loading...</div>}>
+            <SearchBar />
+          </Suspense>
           {/* cart */}
           <ShoppingCartIcon />
           {/* login */}

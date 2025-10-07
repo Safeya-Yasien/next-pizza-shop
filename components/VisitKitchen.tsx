@@ -64,12 +64,11 @@ export default function VisitKitchen() {
           <div className="relative ">
             <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
               <Image
-                src="/visitKitchen.webp"
+                src="/images/visitKitchen.webp"
                 alt="SahandPizza Kitchen"
                 width={600}
                 height={400}
                 className="object-cover w-full h-[350px] sm:h-[450px] "
-                priority
               />
               {/* Overlay Text */}
               <div className="absolute bottom-4 left-4 bg-black/60 text-white px-4 py-2 text-sm sm:text-base shadow-md flex flex-col gap-2">
