@@ -6,7 +6,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const SearchBar = () => {
-  // console.log("SearchBar render");
   const [searchQuery, setSearchQuery] = useState("");
 
   const searchParams = useSearchParams();
